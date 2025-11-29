@@ -2,9 +2,10 @@ package in.shubhamprakash681.controllers;
 
 import java.util.List;
 
+import in.shubhamprakash681.dto.UserRequest;
+import in.shubhamprakash681.dto.UserResponse;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.shubhamprakash681.models.User;
 import in.shubhamprakash681.services.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -27,13 +28,13 @@ public class UserController {
     @GetMapping("/")
     // or
     // @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserResponse>> getUsers() {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserDetails(@PathVariable long id) {
-        User user = userService.getUserDetails(id);
+    public ResponseEntity<UserResponse> getUserDetails(@PathVariable long id) {
+        UserResponse user = userService.getUserDetails(id);
         if (user == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
@@ -41,13 +42,13 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<List<User>> createUser(@RequestBody User user) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(user));
+    public ResponseEntity<List<UserResponse>> createUser(@RequestBody UserRequest userReq) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(userReq));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User user) {
-        User updatedUSer = userService.updateUser(id, user);
+    public ResponseEntity<UserResponse> updateUser(@PathVariable long id, @RequestBody UserRequest userReq) {
+        UserResponse updatedUSer = userService.updateUser(id, userReq);
 
         if (updatedUSer == null)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
