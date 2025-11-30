@@ -1,6 +1,5 @@
 package in.shubhamprakash681.repositories;
 
-import in.shubhamprakash681.dto.CartItemResponse;
 import in.shubhamprakash681.models.CartItem;
 import in.shubhamprakash681.models.Product;
 import in.shubhamprakash681.models.User;
