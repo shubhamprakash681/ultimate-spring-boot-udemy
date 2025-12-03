@@ -74,6 +74,18 @@ public class CartService {
         return userOpt.map(user -> cartRepository.findByUser(user).stream().map(this::mapCartItemToCartItemResponse).toList()).orElseGet(ArrayList::new);
     }
 
+    public boolean clearCart(String userId) {
+        Optional<User> userOptional = userRepository.findById(Long.valueOf(userId));
+
+        if (userOptional.isEmpty()) {
+            return false;
+        }
+
+        User user = userOptional.get();
+        cartRepository.deleteByUser(user);
+        return true;
+    }
+
     private CartItemResponse mapCartItemToCartItemResponse(CartItem cartItem) {
         CartItemResponse cartItemResponse = new CartItemResponse();
         cartItemResponse.setId(String.valueOf(cartItem.getId()));
