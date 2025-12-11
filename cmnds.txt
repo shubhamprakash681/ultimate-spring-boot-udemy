@@ -1,0 +1,28 @@
+## To generate Docker image of Spring Boot App
+./mvnw sprig-boot:build-image "-Dspring-boot.build-image.imageName=<docker-username>/<image-name>>"
+
+### Docker Commands ###
+docker pull <image-name>
+docker pull <image-name>:<tag>
+docker push <username/image-name>
+docker-compose up
+docker-compose down
+
+docker image ls
+docker container ls
+docker ps -a
+docker start <container-id-or-name>
+docker stop <container-id-or-name>
+docker rm <container-id-or-name>
+docker build -t <image-name> .
+docker image remove repoName
+docker run imageName
+docker run -it -d -p <host-port>:<container-port> --name <container-name> <image-name>
+
+docker builder prune [to delete image cache]
+
+docker exec -it <container-id-or-name> bash [Login to a running container]
+
+docker logs <container-id-or-name> [view logs of a container]
+
+docker inspect <container-id-or-name> [view detailed info of a container]
