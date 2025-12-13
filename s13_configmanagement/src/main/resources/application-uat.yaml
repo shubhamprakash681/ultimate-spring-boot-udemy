@@ -1,0 +1,11 @@
+build:
+  id: 102
+  version: 1.9.6
+  name: Stage Build
+
+app:
+  welcomeMessage: "Welcome to the Stage Environment!"
+  maxLoginAttempts: 8
+  featureToggles:
+    newDashboard: true
+    betaFeatures: false

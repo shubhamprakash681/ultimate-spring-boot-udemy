@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: s13_configmanagement
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE}
+
+build:
+  id: 100
+  version: 1.0.0
+  name: Default Build
