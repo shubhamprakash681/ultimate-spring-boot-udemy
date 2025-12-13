@@ -10,9 +10,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>in.shubhamprakash681</groupId>
-    <artifactId>P01_ecom_microservice</artifactId>
+    <artifactId>P01_ecom_monolith</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>P01_ecom_microservice</name>
+    <name>P01_ecom_monolith</name>
     <description>Ecom API using Spring Boot</description>
     <url/>
     <licenses>
