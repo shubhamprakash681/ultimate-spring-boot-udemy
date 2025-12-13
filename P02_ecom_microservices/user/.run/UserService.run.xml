@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="UserService" type="Application" factoryName="Application">
+    <option name="envFilePaths">
+      <option value="$PROJECT_DIR$/user/.env" />
+    </option>
+    <option name="MAIN_CLASS_NAME" value="in.shubhamprakash681.ecom_micro.user.UserApplication" />
+    <module name="user" />
+    <option name="VM_PARAMETERS" value="-Duser.timezone=Asia/Kolkata" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
