@@ -1,0 +1,11 @@
+build:
+  id: 101
+  version: 1.9.5
+  name: Production Build
+
+app:
+  welcomeMessage: "Welcome to the Prod Environment!"
+  maxLoginAttempts: 6
+  featureToggles:
+    newDashboard: true
+    betaFeatures: false

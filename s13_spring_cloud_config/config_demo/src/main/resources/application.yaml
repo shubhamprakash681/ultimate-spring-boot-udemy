@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: config_demo
+  config:
+    # if configserver is down then it will fall back to local configs
+    import: optional:configserver:http://localhost:8888
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE}
+
+build:
+  id: 100
+  version: 1.0.0
+  name: Default Build
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh

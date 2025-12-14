@@ -1,0 +1,11 @@
+build:
+  id: 103
+  version: 1.9.7
+  name: Development Build
+
+app:
+  welcomeMessage: "Welcome to the Dev Environment!"
+  maxLoginAttempts: 10
+  featureToggles:
+    newDashboard: true
+    betaFeatures: true

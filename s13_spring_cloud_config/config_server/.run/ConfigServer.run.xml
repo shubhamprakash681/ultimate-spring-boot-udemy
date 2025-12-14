@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ConfigServer" type="Application" factoryName="Application">
+    <option name="envFilePaths">
+      <option value="$PROJECT_DIR$/config_server/.env" />
+    </option>
+    <option name="MAIN_CLASS_NAME" value="in.shubhamprakash681.config_server_demo.ConfigServerDemoApplication" />
+    <module name="config_server_demo" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

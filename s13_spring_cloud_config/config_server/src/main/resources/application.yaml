@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: config_server_demo
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/shubhamprakash681/spring-cloud-configs
+          username: ${GIT_USER}
+          password: ${GIT_TOKEN}
+
+server:
+  port: 8888
