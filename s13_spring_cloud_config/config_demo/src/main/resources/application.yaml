@@ -11,9 +11,3 @@ build:
   id: 100
   version: 1.0.0
   name: Default Build
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh

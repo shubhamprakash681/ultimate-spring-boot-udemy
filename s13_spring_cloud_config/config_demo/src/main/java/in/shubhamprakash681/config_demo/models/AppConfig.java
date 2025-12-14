@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class AppConfig {
     private String welcomeMessage;
+    private String encryptedMessage;
     private int maxLoginAttempts;
     private FeatureToggles featureToggles;
 }
