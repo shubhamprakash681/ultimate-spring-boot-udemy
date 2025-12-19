@@ -2,39 +2,8 @@ spring:
   application:
     name: user
 
-#  h2:
-#    console:
-#      enabled: true
-
-  datasource:
-    url: ${DB_URL}
-    driverClassName: org.postgresql.Driver
-    username: ${DB_USERNAME}
-    password: ${DB_USER_PASSWORD}
-
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    database: POSTGRESQL
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-
-server:
-  port: ${PORT:8080}
-
-# Actuator
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-    health:
-      show-details: always
-
-# Actuator - Info
-  info:
-    app:
-      enabled: true
-      name: ${spring.application.name}
-      description: User service for eCommerce app
-      version: 1.0.0
+  config:
+    # if configserver is down then it will fall back to local configs
+    import: optional:configserver:http://localhost:8888
+#  profiles:
+#    active: ${SPRING_PROFILE_ACTIVE}

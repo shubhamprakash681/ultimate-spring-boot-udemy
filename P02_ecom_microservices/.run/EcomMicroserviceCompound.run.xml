@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="EcomMicroserviceCompound" type="CompoundRunConfigurationType">
+    <toRun name="ConfigServer" type="Application" />
     <toRun name="OrderService" type="Application" />
     <toRun name="ProductService" type="Application" />
     <toRun name="UserService" type="Application" />

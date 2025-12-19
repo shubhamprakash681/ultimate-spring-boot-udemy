@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: config_server
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/shubhamprakash681/spring-cloud-configs
+          username: ${GIT_USER}
+          password: ${GIT_TOKEN}
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+server:
+  port: 8888
+
+# Key for encryption/decrytion of sensitive env
+#/encrypt & /decrypt uses this key
+encrypt:
+  key: ${ENCRYPTION_KEY}
