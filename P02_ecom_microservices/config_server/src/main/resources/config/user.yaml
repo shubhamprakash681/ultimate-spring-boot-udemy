@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: user
+
+  #  h2:
+  #    console:
+  #      enabled: true
+
+  datasource:
+    url: ${USER_DB_URL}
+    driverClassName: org.postgresql.Driver
+    username: ${USER_DB_USERNAME}
+    password: ${USER_DB_USER_PASSWORD}
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  cloud:
+    bus:
+      enabled: true
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: ${USER_PORT}
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    health:
+      show-details: always
+
+  # Actuator - Info
+  info:
+    app:
+      enabled: true
+      name: ${spring.application.name}
+      description: User service for eCommerce microservice project
+      version: 1.0.0

@@ -2,13 +2,28 @@ spring:
   application:
     name: config_server
 
+# For Git repo based config
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://github.com/shubhamprakash681/spring-cloud-configs
+#          username: ${GIT_USER}
+#          password: ${GIT_TOKEN}
+
+# For Native config
+  profiles:
+    active: native
+
   cloud:
     config:
       server:
-        git:
-          uri: https://github.com/shubhamprakash681/spring-cloud-configs
-          username: ${GIT_USER}
-          password: ${GIT_TOKEN}
+        native:
+          ## Dynamically refetch this file on refresh
+          search-location: file:///C:\11Drive\myCodes\javaPgms\ultimate-spring-boot-udemy\P02_ecom_microservices\config_server\src\main\resources\config
+
+          ## Loads classpath on application load itself. So, this will not dynamically refresh
+          # search-location: classpath:/config
 
   rabbitmq:
     host: localhost
@@ -25,7 +40,7 @@ management:
 server:
   port: 8888
 
-# Key for encryption/decrytion of sensitive env
-#/encrypt & /decrypt uses this key
-encrypt:
-  key: ${ENCRYPTION_KEY}
+## Key for encryption/decrytion of sensitive env
+##/encrypt & /decrypt uses this key
+#encrypt:
+#  key: ${ENCRYPTION_KEY}
