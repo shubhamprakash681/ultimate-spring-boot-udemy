@@ -48,3 +48,12 @@ management:
       name: ${spring.application.name}
       description: User service for eCommerce microservice project
       version: 1.0.0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: eureka_server
+
+  config:
+    # if configserver is down then it will fall back to local configs
+    import: optional:configserver:http://localhost:8888
