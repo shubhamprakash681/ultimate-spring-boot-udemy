@@ -1,7 +1,11 @@
 package in.shubhamprakash681.ecom_micro.order.services;
 
+import in.shubhamprakash681.ecom_micro.order.clients.products.ProductServiceClient;
+import in.shubhamprakash681.ecom_micro.order.clients.users.UserServiceClient;
 import in.shubhamprakash681.ecom_micro.order.dto.CartItemRequest;
 import in.shubhamprakash681.ecom_micro.order.dto.CartItemResponse;
+import in.shubhamprakash681.ecom_micro.order.dto.product.ProductResponse;
+import in.shubhamprakash681.ecom_micro.order.dto.user.UserResponse;
 import in.shubhamprakash681.ecom_micro.order.models.CartItem;
 import in.shubhamprakash681.ecom_micro.order.repositories.CartRepository;
 import jakarta.transaction.Transactional;
@@ -16,8 +20,17 @@ import java.util.List;
 @Transactional
 public class CartService {
     private final CartRepository cartRepository;
+    private final ProductServiceClient productServiceClient;
+    private final UserServiceClient userServiceClient;
 
     public boolean addToCart(String userId, CartItemRequest item) {
+        ProductResponse productRes = productServiceClient.getProductById(item.getProductId());
+        UserResponse userResponse = userServiceClient.getUserDetails(Long.parseLong(userId));
+
+        if (productRes == null || productRes.getId() == null || userResponse == null || userResponse.getId() == null) return false;
+
+        if (productRes.getStockQuantity() < item.getQuantity()) return false;
+
         CartItem existingCartItem = cartRepository.findByUserIdAndProductId(userId, item.getProductId());
         if (existingCartItem != null) {
             // Update quantity

@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +23,7 @@ public class UserService {
     }
 
     public UserResponse getUserDetails(long id) {
-        return mapToUserResponse(Objects.requireNonNull(userRepository.findById(id).orElse(null)));
+        return userRepository.findById(id).map(this::mapToUserResponse).orElse(null);
     }
 
     public List<UserResponse> addUser(UserRequest userReq) {
@@ -43,7 +42,7 @@ public class UserService {
 
             userRepository.save(existingUser);
 
-            return mapToUserResponse(Objects.requireNonNull(userRepository.findById(id).orElse(null)));
+            return userRepository.findById(id).map(this::mapToUserResponse).orElse(null);
         }).orElse(null);
     }
 

@@ -38,7 +38,7 @@ public class ProductService {
 
             productRepository.save(existingProd);
 
-            return mapProductToProductResponse(Objects.requireNonNull(productRepository.findById(id).orElse(null)));
+            return productRepository.findById(id).map(this::mapProductToProductResponse).orElse(null);
         }).orElse(null);
     }
 
@@ -51,7 +51,7 @@ public class ProductService {
             existingProd.setIsActive(isActiveRequest.getIsActive());
 
             productRepository.save(existingProd);
-            return mapProductToProductResponse(Objects.requireNonNull(productRepository.findById(id).orElse(null)));
+            return productRepository.findById(id).map(this::mapProductToProductResponse).orElse(null);
         }).orElse(null);
     }
 

@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +17,10 @@ public class ProductService {
 
     public List<ProductResponse> getProducts() {
         return productRepository.findByIsActiveTrue().stream().map(this::mapProductToProductResponse).toList();
+    }
+
+    public ProductResponse getProductById(String id) {
+        return productRepository.findByIdAndIsActiveTrue(Long.valueOf(id)).map(this::mapProductToProductResponse).orElse(null);
     }
 
     public ProductResponse createProduct(ProductRequest prodReq) {
@@ -38,7 +41,7 @@ public class ProductService {
 
             productRepository.save(existingProd);
 
-            return mapProductToProductResponse(Objects.requireNonNull(productRepository.findById(id).orElse(null)));
+            return productRepository.findById(id).map(this::mapProductToProductResponse).orElse(null);
         }).orElse(null);
     }
 
@@ -51,7 +54,7 @@ public class ProductService {
             existingProd.setIsActive(isActiveRequest.getIsActive());
 
             productRepository.save(existingProd);
-            return mapProductToProductResponse(Objects.requireNonNull(productRepository.findById(id).orElse(null)));
+            return productRepository.findById(id).map(this::mapProductToProductResponse).orElse(null);
         }).orElse(null);
     }
 
