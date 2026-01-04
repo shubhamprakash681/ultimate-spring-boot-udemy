@@ -3,7 +3,7 @@ spring:
     name: user
 
   config:
-    # if configserver is down then it will fall back to local configs
+    # if config-server is down then it will fall back to local configs
     import: optional:configserver:http://localhost:8888
 #  profiles:
 #    active: ${SPRING_PROFILE_ACTIVE}

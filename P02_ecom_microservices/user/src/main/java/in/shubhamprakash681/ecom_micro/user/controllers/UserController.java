@@ -16,7 +16,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/")
+    @GetMapping()
     // or
     // @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<UserResponse>> getUsers() {
