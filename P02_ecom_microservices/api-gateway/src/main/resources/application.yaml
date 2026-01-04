@@ -1,34 +1,7 @@
-server:
-  port: 8080
-
 spring:
   application:
     name: api-gateway
 
-  cloud:
-    gateway:
-      server:
-        webflux:
-          routes:
-            - id: user-route
-              uri: lb://USER
-              predicates:
-                - Path=/api/users/**
-            - id: product-route
-              uri: lb://PRODUCT
-              predicates:
-                - Path=/api/products/**
-
-            - id: cart-route
-              uri: lb://ORDER
-              predicates:
-                - Path=/api/cart/**
-            - id: order-route
-              uri: lb://ORDER
-              predicates:
-                - Path=/api/orders/**
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+  config:
+    # if config-server is down then it will fall back to local configs
+    import: optional:configserver:http://localhost:8888
