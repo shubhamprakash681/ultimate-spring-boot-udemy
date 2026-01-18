@@ -9,20 +9,20 @@ spring:
     gateway:
       routes:
         - id: user-route
-          uri: lb://USER
+          uri: lb://USER-SERVICE
           predicates:
             - Path=/api/users/**
         - id: product-route
-          uri: lb://PRODUCT
+          uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/api/products/**
 
         - id: cart-route
-          uri: lb://ORDER
+          uri: lb://ORDER-SERVICE
           predicates:
             - Path=/api/cart/**
         - id: order-route
-          uri: lb://ORDER
+          uri: lb://ORDER-SERVICE
           predicates:
             - Path=/api/orders/**
 
