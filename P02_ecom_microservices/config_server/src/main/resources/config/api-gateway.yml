@@ -7,39 +7,58 @@ spring:
 
   cloud:
     gateway:
-      server:
-        webflux:
-          routes:
-            - id: user-route
-              uri: lb://USER
-              predicates:
-                - Path=/api/users/**
-            - id: product-route
-              uri: lb://PRODUCT
-              predicates:
-                - Path=/api/products/**
+      routes:
+        - id: user-route
+          uri: lb://USER
+          predicates:
+            - Path=/api/users/**
+        - id: product-route
+          uri: lb://PRODUCT
+          predicates:
+            - Path=/api/products/**
 
-            - id: cart-route
-              uri: lb://ORDER
-              predicates:
-                - Path=/api/cart/**
-            - id: order-route
-              uri: lb://ORDER
-              predicates:
-                - Path=/api/orders/**
+        - id: cart-route
+          uri: lb://ORDER
+          predicates:
+            - Path=/api/cart/**
+        - id: order-route
+          uri: lb://ORDER
+          predicates:
+            - Path=/api/orders/**
 
-            - id: eureka-server
-              uri: http://localhost:8761
-              predicates:
-                - Path=/eureka/main
-              filters:
-                - SetPath=/
-            - id: eureka-server-static
-              uri: http://localhost:8761
-              predicates:
-                - Path=/eureka/**
+        - id: eureka-server
+          uri: http://localhost:8761
+          predicates:
+            - Path=/eureka/main
+          filters:
+            - SetPath=/
+        - id: eureka-server-static
+          uri: http://localhost:8761
+          predicates:
+            - Path=/eureka/**
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    health:
+      show-details: always
+
+  # Actuator - Info
+  info:
+    app:
+      enabled: true
+      name: ${spring.application.name}
+      description: User service for eCommerce microservice project
+      version: 1.0.0
+
+logging:
+  level:
+    com.netflix: WARN

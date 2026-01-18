@@ -1,17 +1,20 @@
+server:
+  port: 8888
+
 spring:
   application:
     name: config_server
 
-# For Git repo based config
-#  cloud:
-#    config:
-#      server:
-#        git:
-#          uri: https://github.com/shubhamprakash681/spring-cloud-configs
-#          username: ${GIT_USER}
-#          password: ${GIT_TOKEN}
+  # For Git repo based config
+  #  cloud:
+  #    config:
+  #      server:
+  #        git:
+  #          uri: https://github.com/shubhamprakash681/spring-cloud-configs
+  #          username: ${GIT_USER}
+  #          password: ${GIT_TOKEN}
 
-# For Native config
+  # For Native config
   profiles:
     active: native
 
@@ -25,6 +28,9 @@ spring:
           ## Loads classpath on application load itself. So, this will not dynamically refresh
           # search-location: classpath:/config
 
+  bus:
+    enabled: true
+
   rabbitmq:
     host: localhost
     port: 5672
@@ -35,10 +41,14 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: busrefresh, health, info # Expose for production monitoring
+  endpoint:
+    health:
+      show-details: always
 
-server:
-  port: 8888
+logging:
+  level:
+    org.springframework.cloud: DEBUG # For production, set to INFO
 
 ## Key for encryption/decrytion of sensitive env
 ##/encrypt & /decrypt uses this key
