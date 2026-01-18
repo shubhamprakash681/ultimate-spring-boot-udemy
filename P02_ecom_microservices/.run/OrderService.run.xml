@@ -5,8 +5,8 @@
     <option name="envFilePaths">
       <option value="$PROJECT_DIR$/.env" />
     </option>
-    <option name="MAIN_CLASS_NAME" value="in.shubhamprakash681.user.UserApplication" />
-    <module name="user" />
+    <option name="MAIN_CLASS_NAME" value="in.shubhamprakash681.order.OrderApplication" />
+    <module name="order" />
     <option name="VM_PARAMETERS" value="-Duser.timezone=Asia/Kolkata" />
     <method v="2">
       <option name="Make" enabled="true" />
