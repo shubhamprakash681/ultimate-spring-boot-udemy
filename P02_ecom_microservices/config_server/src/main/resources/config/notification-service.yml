@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: notification-service
+
+  #  h2:
+  #    console:
+  #      enabled: true
+
+  cloud:
+    bus:
+      enabled: true
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: ${NOTIFICATION_PORT}
+
+# RabbitMQ configurations
+rabbitmq:
+  exchange:
+    name: order.exchange
+  queue:
+    name: order.queue
+  routing:
+    key: order.tracking.key

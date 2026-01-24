@@ -1,6 +1,7 @@
 package in.shubhamprakash681.order.services;
 
 import in.shubhamprakash681.order.dto.CartItemResponse;
+import in.shubhamprakash681.order.dto.OrderCreatedEvent;
 import in.shubhamprakash681.order.dto.OrderItemDTO;
 import in.shubhamprakash681.order.dto.OrderResponse;
 import in.shubhamprakash681.order.enums.OrderStatus;
@@ -8,6 +9,8 @@ import in.shubhamprakash681.order.models.Order;
 import in.shubhamprakash681.order.models.OrderItem;
 import in.shubhamprakash681.order.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,13 @@ import java.util.Optional;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final CartService cartService;
+
+    private final RabbitTemplate rabbitTemplate;
+
+    @Value("${rabbitmq.exchange.name}")
+    private String exchangeName;
+    @Value("${rabbitmq.routing.key}")
+    private String routingKey;
 
     @Transactional
     public Optional<OrderResponse> createOrder(String userId) {
@@ -54,6 +64,13 @@ public class OrderService {
             return Optional.empty();
         }
 
+        OrderCreatedEvent orderEvent = new OrderCreatedEvent(createdOrder.getId(), createdOrder.getUserId(),
+                createdOrder.getStatus(),
+                createdOrder.getItems().stream().map(this::mapOrderItemToDto).toList(),
+                createdOrder.getTotalAmount(), createdOrder.getCreatedAt());
+
+        rabbitTemplate.convertAndSend(exchangeName, routingKey, orderEvent);
+
         return Optional.of(mapOrderToOrderResponse(createdOrder));
     }
 
@@ -63,19 +80,22 @@ public class OrderService {
         response.setStatus(order.getStatus());
         response.setTotalAmount(order.getTotalAmount());
         response.setCreatedAt(order.getCreatedAt());
-        List<OrderItemDTO> items = order.getItems().stream().map(orderItem -> {
-            OrderItemDTO itemDTO = new OrderItemDTO();
-
-            itemDTO.setId(orderItem.getId());
-            itemDTO.setProductId(orderItem.getProductId());
-            itemDTO.setQuantity(orderItem.getQuantity());
-            itemDTO.setPrice(orderItem.getPrice());
-            itemDTO.setSubTotal(orderItem.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity())));
-            return itemDTO;
-        }).toList();
+        List<OrderItemDTO> items = order.getItems().stream().map(this::mapOrderItemToDto).toList();
 
         response.setItems(items);
 
         return response;
+    }
+
+    private OrderItemDTO mapOrderItemToDto(OrderItem item) {
+        OrderItemDTO itemDTO = new OrderItemDTO();
+
+        itemDTO.setId(item.getId());
+        itemDTO.setProductId(item.getProductId());
+        itemDTO.setQuantity(item.getQuantity());
+        itemDTO.setPrice(item.getPrice());
+        itemDTO.setSubTotal(item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
+
+        return itemDTO;
     }
 }

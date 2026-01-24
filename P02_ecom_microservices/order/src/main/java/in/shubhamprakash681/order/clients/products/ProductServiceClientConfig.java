@@ -20,7 +20,7 @@ public class ProductServiceClientConfig {
     @Bean
     public ProductServiceClient productServiceClient() {
         WebClient webClient = webClientBuilderForProductClient()
-                .baseUrl("http://product")
+                .baseUrl("http://product-service")
                 .defaultStatusHandler(HttpStatusCode::is4xxClientError, (_res) -> Mono.empty())
                 .build();
 

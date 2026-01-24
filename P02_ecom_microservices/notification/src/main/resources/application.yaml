@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: notification-service
+
+  config:
+    # if config-server is down then it will fall back to local configs
+    import: optional:configserver:http://localhost:8888

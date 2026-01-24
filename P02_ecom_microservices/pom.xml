@@ -16,6 +16,7 @@
         <module>product</module>
         <module>order</module>
         <module>user</module>
+        <module>notification</module>
     </modules>
 
     <properties>

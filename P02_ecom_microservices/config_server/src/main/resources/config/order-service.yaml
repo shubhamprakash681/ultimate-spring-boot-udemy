@@ -57,3 +57,12 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
+
+# RabbitMQ configurations
+rabbitmq:
+  exchange:
+    name: order.exchange
+  queue:
+    name: order.queue
+  routing:
+    key: order.tracking.key

@@ -20,7 +20,7 @@ public class UserServiceClientConfig {
     @Bean
     public UserServiceClient userServiceClient() {
         WebClient webClient = webClientBuilderForUserClient()
-                .baseUrl("http://user")
+                .baseUrl("http://user-service")
                 .defaultStatusHandler(HttpStatusCode::is4xxClientError, (_res) -> Mono.empty())
                 .build();
 
