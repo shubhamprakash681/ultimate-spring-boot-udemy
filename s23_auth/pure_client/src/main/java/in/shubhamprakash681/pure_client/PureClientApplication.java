@@ -47,6 +47,7 @@ public class PureClientApplication {
                                     RestTemplate restTemplate,
                                     @Value("${resource-service.uri}") String resourceServiceUrl) {
         return args -> {
+            //    Creating new Access Token
             var authRequest = OAuth2AuthorizeRequest
                     .withClientRegistrationId("keycloak-client")
                     .principal("machine")

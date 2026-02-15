@@ -1,0 +1,29 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: protected_client
+
+  security:
+    oauth2:
+      # Config for acting as Protected OAuth2 Resource Server
+      resourceserver:
+        jwt:
+          issuer-uri: ${OAUTH2_RESOURCE_JWT_ISSUER_URL}
+
+      # Config for acting as OAuth2 Client
+      client:
+        registration:
+          keycloak-client:
+            client-id: ${OAUTH2_PURE_CLIENT_CLIENT_ID}
+            client-secret: ${OAUTH2_PURE_CLIENT_CLIENT_SECRET}
+            scope: openid
+            authorization-grant-type: client_credentials
+
+        provider:
+          keycloak-client:
+            token-uri: ${OAUTH2_PURE_CLIENT_PROVIDER_TOKEN_URI}
+
+resource-service:
+  uri: http://localhost:8082
