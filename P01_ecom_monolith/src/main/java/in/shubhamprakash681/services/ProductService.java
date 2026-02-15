@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +33,8 @@ public class ProductService {
             existingProd.setCategory(prodReq.getCategory());
             existingProd.setImageUrl(prodReq.getImageUrl());
             existingProd.setStockQuantity(prodReq.getStockQuantity());
-            if (prodReq.getIsActive() != null) existingProd.setIsActive(prodReq.getIsActive());
+            if (prodReq.getIsActive() != null)
+                existingProd.setIsActive(prodReq.getIsActive());
 
             productRepository.save(existingProd);
 
@@ -76,14 +76,16 @@ public class ProductService {
     private Product mapProductRequestToProduct(ProductRequest prodReq) {
         Product product = new Product();
 
-        if (prodReq.getId() != null) product.setId(Long.valueOf(prodReq.getId()));
+        if (prodReq.getId() != null)
+            product.setId(Long.valueOf(prodReq.getId()));
         product.setName(prodReq.getName());
         product.setDescription(prodReq.getDescription());
         product.setCategory(prodReq.getCategory());
         product.setPrice(prodReq.getPrice());
         product.setStockQuantity(prodReq.getStockQuantity());
         product.setImageUrl(prodReq.getImageUrl());
-        if (prodReq.getIsActive() != null) product.setIsActive(prodReq.getIsActive());
+        if (prodReq.getIsActive() != null)
+            product.setIsActive(prodReq.getIsActive());
 
         return product;
     }

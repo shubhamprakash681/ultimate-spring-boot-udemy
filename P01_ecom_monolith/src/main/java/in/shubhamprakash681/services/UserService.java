@@ -1,7 +1,6 @@
 package in.shubhamprakash681.services;
 
 import java.util.List;
-import java.util.Objects;
 
 import in.shubhamprakash681.dto.AddressDto;
 import in.shubhamprakash681.dto.UserRequest;
@@ -74,7 +73,8 @@ public class UserService {
     private User mapUserRequestToUser(UserRequest userReq) {
         User user = new User();
 
-        if (userReq.getId() != null) user.setId(Long.valueOf(userReq.getId()));
+        if (userReq.getId() != null)
+            user.setId(Long.valueOf(userReq.getId()));
         user.setFirstName(userReq.getFirstName());
         user.setLastName(userReq.getLastName());
         user.setEmail(userReq.getEmail());

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: auth-code-flow-demo-client
+
+  security:
+    oauth2:
+      client:
+        registration:
+          oauth2-authorization-code-flow:
+            client-id: ${OAUTH2_REGISTRATION_CLIENT_ID}
+            client-secret: ${OAUTH2_REGISTRATION_CLIENT_SECRET}
+            scope: openid,profile,roles,email
+            authorization-grant-type: authorization_code
+            redirect-uri: ${OAUTH2_REGISTRATION_REDIRECT_URL}
+
+        provider:
+          oauth2-authorization-code-flow:
+            issuer-uri: ${OAUTH2_REGISTRATION_ISSUER_URL}
+
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          oauth2: DEBUG

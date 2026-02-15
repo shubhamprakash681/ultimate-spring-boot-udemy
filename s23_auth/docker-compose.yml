@@ -1,20 +1,18 @@
-version: "3.8"
-
 services:
-  rabbitmq:
-    container_name: configserver_rabbitmq
-    image: rabbitmq:4-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-    networks:
-      - myapp_network
-    volumes:
-      - config_rabbitmq_data:/var/lib/rabbitmq
-    restart: unless-stopped
+#  rabbitmq:
+#    container_name: configserver_rabbitmq
+#    image: rabbitmq:4-management
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    environment:
+#      RABBITMQ_DEFAULT_USER: guest
+#      RABBITMQ_DEFAULT_PASS: guest
+#    networks:
+#      - myapp_network
+#    volumes:
+#      - config_rabbitmq_data:/var/lib/rabbitmq
+#    restart: unless-stopped
 
   postgres_container:
     image: postgres:latest
@@ -90,8 +88,8 @@ networks:
 
 volumes:
   postgres_data:
-    name: p02_ecom_microservice_postgres_volume
+    name: s23_auth_demo_postgres_volume
   pgadmin_data:
-    name: p02_ecom_microservice_pgadmin_volume
-  config_rabbitmq_data:
-    name: p02_ecom_microservice_config_rabbitmq_volume
+    name: s23_auth_demo_pgadmin_volume
+#  config_rabbitmq_data:
+#    name: p02_ecom_microservice_config_rabbitmq_volume

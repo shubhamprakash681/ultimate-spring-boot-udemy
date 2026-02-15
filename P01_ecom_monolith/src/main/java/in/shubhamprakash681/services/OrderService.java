@@ -41,7 +41,8 @@ public class OrderService {
         User user = userOpt.get();
 
         // Calculate total price
-        BigDecimal totalPrice = cartItemsResponse.stream().map(CartItemResponse::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal totalPrice = cartItemsResponse.stream().map(CartItemResponse::getPrice).reduce(BigDecimal.ZERO,
+                BigDecimal::add);
 
         // Create Order and OrderItems
         Order order = new Order();
@@ -57,7 +58,7 @@ public class OrderService {
             return orderItem;
         }).toList();
         order.setItems(orderItems);
-        Order createdOrder = orderRepository.save(order);
+        orderRepository.save(order);
 
         // Clear Cart
         boolean cartCleared = cartService.clearCart(userId);
